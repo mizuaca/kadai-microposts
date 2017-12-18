@@ -11,6 +11,13 @@
 |
 */
 
+//デフォルト
 Route::get('/', function () {
     return view('welcome');
 });
+
+//メソッドチェーン
+//『「sign up」にアクセスすると「AuthController」の「getRegister」処理を実行する』
+Route::get('signup', 'Auth\AuthController@getRegister')->name('signup.get');
+//『「sign up」にアクセスすると「AuthController」の「postRegister」処理を実行する』
+Route::post('signup', 'Auth\AuthController@postRegister')->name('signup.post');
