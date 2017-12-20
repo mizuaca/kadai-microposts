@@ -12,9 +12,7 @@
 */
 
 //デフォルト
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController@index');
 
 //メソッドチェーン
 //『「sign up」にアクセスすると「AuthController」の「getRegister」処理を実行する』
@@ -27,5 +25,11 @@ Route::get('login', 'Auth\AuthController@getLogin')->name('login.get');
 Route::post('login', 'Auth\AuthController@postLogin')->name('login.post');
 Route::get('logout', 'Auth\AuthController@getLogout')->name('logout.get');
 
-
+//ログアウト機能
 Route::get('logout', 'Auth\AuthController@getLogout')->name('logout.get');
+
+//ログイン認証つきルーティング
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+    Route::resource('microposts', 'MicropostsController', ['only' => ['store', 'destroy']]);
+});
