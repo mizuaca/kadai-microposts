@@ -11,10 +11,17 @@ abstract class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     public function counts($user) {
+        //投稿数のカウント
         $count_microposts = $user->microposts()->count();
+        //フォロー中人数のカウント
+        $count_followings = $user->followings()->count();
+        //フォロワー数のカウント
+        $count_followers = $user->followers()->count();
         
         return [
             'count_microposts' => $count_microposts,
+            'count_followings' => $count_followings,
+            'count_followers' => $count_followers,
         ];
     }
 }
