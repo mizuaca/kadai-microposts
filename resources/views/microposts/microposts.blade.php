@@ -12,12 +12,15 @@
             <div>
                 <p>{!! nl2br(e($micropost->content)) !!}</p>
             </div>
-             <div>
+            <div class="btn-group" style="display:inline-flex">
+                <div>@include('user_favorite.favorite_button', ['micropost' => $micropost])</div>
+                <div>
                 @if (Auth::user()->id == $micropost->user_id)
                     {!! Form::open(['route' => ['microposts.destroy', $micropost->id], 'method' => 'delete']) !!}
                         {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
                     {!! Form::close() !!}
                 @endif
+                </div
             </div>
         </div>
     </li>
